@@ -11,92 +11,59 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-static int	find_digit(int n)
+static int	find_digit(int n, int *flag, unsigned int *nb)
 {
-	int	cnt;
+	int				cnt;
+	unsigned int	tmp;
 
 	if (n == 0)
+	{
+		*nb = 0;
 		return (1);
+	}
 	cnt = 0;
 	if (n < 0)
+	{
+		*nb = -n;
 		cnt++;
-	while (n)
+		*flag = 1;
+	}
+	else
+		*nb = n;
+	tmp = *nb;
+	while (tmp)
 	{
 		cnt++;
-		n /= 10;
+		tmp /= 10;
 	}
 	return (cnt);
 }
 
-char	*ft_reverse(char *str)
-{
-	int		len;
-	int		i;
-	char	*res;
-
-	len = ft_strlen(str);
-	i = 0;
-	while (i < len)
-	{
-		res[i] = str[len - i - 1];
-		i++;
-	}
-	res[i] = 0;
-	return (res);
-}
-
 char	*ft_itoa(int n)
 {
-	int		i;
-	char	*res;
-	char	tmp[12];
-	
-	i = 0;
-	if (n == 0)
-		tmp[i++] = '0';
-	while (n != 0)
+	int				digit;
+	unsigned int	nb;
+	int				flag;
+	char			*res;
+	char			*tmp;
+
+	digit = find_digit(n, &flag, &nb);
+	res = (char *)malloc(sizeof(char) * (digit + 1));
+	if (!res)
+		return (0);
+	tmp = res;
+	if (flag)
+		*tmp = '-';
+	tmp += (digit - 1);
+	if (nb == 0)
+		res[0] = '0';
+	while (nb != 0)
 	{
-		if (n < 0)
-		{
-			tmp[i++] = -(n % 10) + '0';
-			if (n > -10)
-				tmp[i++] = '-'; 
-		}
-		else
-			tmp[i++] = (n % 10) + '0';
-		n /= 10;
+		*tmp = nb % 10 + '0';
+		tmp--;
+		nb /= 10;
 	}
-	tmp[i] = 0;
-//	printf("tmp:%s\n", tmp);
-//	res = ft_reverse(tmp);
-//	printf("res:%s\n", res);
-	return (tmp);
+	res[digit] = 0;
+	return (res);
 }
-/*
-char	*ft_utoa(unsigned n)
-{
-	int		i;
-	char	*res;
-	char	tmp[12];
-	
-	i = 0;
-	if (n == 0)
-		tmp[i++] = '0';
-	while (n != 0)
-	{
-		if (n < 0)
-		{
-			tmp[i++] = -(d % 10) + '0';
-			if (d > -10)
-				tmp[i++] = '-'; 
-		}
-		else
-			tmp[i++] = (d % 10) + '0';
-		d /= 10;
-	}
-	tmp[i] = 0;
-	res = ft_reverse(tmp);
-	
-}*/

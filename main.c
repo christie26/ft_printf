@@ -1,5 +1,6 @@
 #include "ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 int	main(void)
 {
@@ -29,6 +30,19 @@ int	main(void)
 //	b = ft_printf("%u %u %u\n", 0, 2147483648, 4294967295);	
 //	printf("return value:%d, %d\n", a, b);
 
+//	unsigned int num = 486;
+//	printf("\n5. format of p\n");
+//	a = printf("%p\n",&num);
+//	b = ft_printf("%p\n",&num);
+//	printf("return value:%d, %d\n", a, b);
+
+	a = printf("%x\n",LONG_MAX);
+	b = ft_printf("%x\n",LONG_MAX);
+	printf("return value:%d, %d\n", a, b);
+		
+	a = printf("%x\n",LONG_MIN);
+	b = ft_printf("%x\n",LONG_MIN);
+	printf("return value:%d, %d\n", a, b);
 	
 	return (0);
 }

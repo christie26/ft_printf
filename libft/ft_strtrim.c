@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-static int check_set(char s1, char const *set)
+static int	check_set(char s1, char const *set)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (set[i])
@@ -28,9 +28,9 @@ static int check_set(char s1, char const *set)
 
 char	*ft_strtrim(char const *src, char const *set)
 {
-	size_t	begin;
-	size_t	i;
-	size_t	len;
+	int		begin;
+	int		i;
+	int		len;
 	char	*res;
 
 	i = 0;

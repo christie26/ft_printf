@@ -12,26 +12,26 @@ LSRCS		= libft/ft_strlen.c libft/ft_strlcpy.c libft/ft_strlcat.c \
 		libft/ft_lstadd_back.c libft/ft_lstdelone.c libft/ft_lstclear.c \
 		libft/ft_lstiter.c libft/ft_lstmap.c
 
-SRCS		= ft_format_1.c ft_fotmat_2.c
+SRCS		= ft_format_1.c ft_format_2.c ft_printf.c ft_utils.c
 
 LOBJS		= ${LSRCS:.c=.o}
 OBJS		= ${SRCS:.c=.o}
 
-LIBFT		= libft.a
+LIBFT		= ./libft.a
 NAME		= libftprintf.a
 
-CC		= cc
+CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
 
-RM		= rm -f
+RM			= rm -f
 
 all:		${NAME}
 
 ${NAME}:	${LIBFT} ${OBJS} 
 			ar rcs ${NAME} ${LIBFT} ${OBJS}
 
-${LIBFT}:	${LOBJS}
-			ar rcs ${LIBFT} ${LOBJS}
+${LIBFT}:
+			./libft/ make all	
 
 .c.o:
 			${CC} ${CFLAGS}	-c $< -o $@

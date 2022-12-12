@@ -24,7 +24,6 @@ int	ft_printf_c(va_list ap)
 int	ft_printf_s(va_list ap)
 {
 	char	*s;
-	int		res;
 
 	s = va_arg(ap, char *);
 	return (write(1, s, ft_strlen(s)));
