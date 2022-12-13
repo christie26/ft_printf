@@ -12,15 +12,21 @@
 
 #include "ft_printf.h"
 
-int	ft_write_hex(long long nb, char *base)
+int	ft_write_hex(unsigned long long nb, char *base)
 {
 	static int	cnt;
+	int			tmp;
 
 	cnt = 0;
 	if (nb > 15)
 		ft_write_hex(nb / 16, base);
-	write(1, &base[nb % 16], 1);
-	cnt++;
+	if (cnt == -1)
+		return (-1);
+	tmp = write(1, &base[nb % 16], 1);
+	if (tmp == -1)
+		cnt = -1;
+	else
+		cnt += tmp;
 	return (cnt);
 }
 
@@ -32,29 +38,33 @@ int	ft_printf_p(va_list ap)
 
 	ptr = (void *)va_arg(ap, void *);
 	cnt = 0;
-	cnt += write(1, &"0", 1);
-	cnt += write(1, &"x", 1);
+	if (write(1, &"0", 1) == -1)
+		return (-1);
+	cnt++;
+	if (write(1, &"x", 1) == -1)
+		return (-1);
+	cnt++;
 	base = "0123456789abcdef";
-	cnt += ft_write_hex((long long)ptr, base);
+	cnt += ft_write_hex((unsigned long long)ptr, base);
 	return (cnt);
 }
 
 int	ft_printf_x(va_list ap)
 {
-	int		x;
-	char	*base;
+	unsigned int	x;
+	char			*base;
 
-	x = va_arg(ap, int);
+	x = va_arg(ap, unsigned int);
 	base = "0123456789abcdef";
 	return (ft_write_hex(x, base));
 }
 
 int	ft_printf_xx(va_list ap)
 {
-	int		xx;
-	char	*base;
+	unsigned int	xx;
+	char			*base;
 
-	xx = va_arg(ap, int);
+	xx = va_arg(ap, unsigned int);
 	base = "0123456789ABCDEF";
 	return (ft_write_hex(xx, base));
 }

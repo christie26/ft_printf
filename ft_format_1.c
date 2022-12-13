@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
+#include "./libft/libft.h"
 
 int	ft_printf_c(va_list ap)
 {
@@ -26,7 +26,10 @@ int	ft_printf_s(va_list ap)
 	char	*s;
 
 	s = va_arg(ap, char *);
-	return (write(1, s, ft_strlen(s)));
+	if (!s)
+		return (write(1, "(null)", 6));
+	else
+		return (write(1, s, ft_strlen(s)));
 }
 
 char	*ft_reverse(char *str)
@@ -52,35 +55,23 @@ char	*ft_reverse(char *str)
 int	ft_printf_di(va_list ap)
 {
 	int		d;
-	int		i;
 	char	*res;
-	char	tmp[12];
+	int		tmp;
 
 	d = va_arg(ap, int);
-	if (d == 0)
-		res = ft_zero();
-	else
-	{
-		i = 0;
-		while (d != 0)
-		{
-			tmp[i++] = ft_abs(d % 10) + '0';
-			if (d > -10 && d < 0)
-				tmp[i++] = '-';
-			d /= 10;
-		}
-		tmp[i] = 0;
-		res = ft_reverse(tmp);
-	}	
+	res = ft_itoa(d);
 	if (!res)
 		return (-1);
-	return (write(1, res, ft_strlen(res)));
+	tmp = write(1, res, ft_strlen(res));
+	free(res);
+	return (tmp);
 }
 
 int	ft_printf_u(va_list ap)
 {
 	unsigned int	u;
 	int				i;
+	int				tem;
 	char			*res;
 	char			tmp[12];
 
@@ -100,5 +91,7 @@ int	ft_printf_u(va_list ap)
 	}	
 	if (!res)
 		return (-1);
-	return (write(1, res, ft_strlen(res)));
+	tem = write(1, res, ft_strlen(res));
+	free(res);
+	return (tem);
 }

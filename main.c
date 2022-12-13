@@ -13,8 +13,14 @@ int	main(void)
 //	printf("return value of two functions: %d, %d\n", a, b);
 
 //	printf("\n2. format of c & s\n");
-//	a = printf("character:%c|string:%s\n", 'a', "happy");
-//	b = ft_printf("character:%c|string:%s\n", 'a', "happy");
+//	a = printf("character:%c\n", 'a');
+//	b = ft_printf("character:%c\n", 'a');
+//	printf("return value:%d, %d\n", a, b);
+	
+//	char *string;
+//	string = 0; // why it's wrong? 
+//	a = printf("string:%s\n", string);
+//	b = ft_printf("string:%s\n", string);
 //	printf("return value:%d, %d\n", a, b);
 
 //	printf("\n3. format of d & i\n");
@@ -32,17 +38,34 @@ int	main(void)
 
 //	unsigned int num = 486;
 //	printf("\n5. format of p\n");
-//	a = printf("%p\n",&num);
-//	b = ft_printf("%p\n",&num);
+//	a = printf("%p\n", (void *)-14523);
+	a = ft_printf("%p\n", 0);
+	b = printf("%p\n", 0);
+	printf("return value:%d, %d\n", a, b);
+	
+//	a = ft_printf("%p\n", (void *)-14523);
+//	b = printf("%p\n", (void *)-14523);
+//	printf("return value:%d, %d\n", a, b);
+//	a = ft_printf("%p\n", (void *)-1);
+//	b = printf("%p\n", (void *)-1);
+//	printf("return value:%d, %d\n", a, b);
+//	a = ft_printf("%p\n", (void *)14523);
+//	b = printf("%p\n", (void *)14523);
+//	printf("return value:%d, %d\n", a, b);
+//	a = ft_printf("%p\n", (void *)4523);
+//	b = printf("%p\n", (void *)4523);
+//	printf("return value:%d, %d\n", a, b);
+//	a = ft_printf("%p\n", (void *)523);
+//	b = printf("%p\n", (void *)523);
 //	printf("return value:%d, %d\n", a, b);
 
-	a = printf("%x\n",LONG_MAX);
-	b = ft_printf("%x\n",LONG_MAX);
+	a = printf("%x\n",-486);
+	b = ft_printf("%x\n",-486);
 	printf("return value:%d, %d\n", a, b);
 		
-	a = printf("%x\n",LONG_MIN);
-	b = ft_printf("%x\n",LONG_MIN);
-	printf("return value:%d, %d\n", a, b);
+//	a = printf("%x\n",LONG_MIN);
+//	b = ft_printf("%x\n",LONG_MIN);
+//	printf("return value:%d, %d\n", a, b);
 	
 	return (0);
 }

@@ -29,13 +29,11 @@ int	ft_format(const char *format, int *idx, va_list ap)
 		return (ft_printf_x(ap));
 	else if (format[*idx] == 'X')
 		return (ft_printf_xx(ap));
+	else if (format[*idx] == '%')
+		return (write(1, &"%", 1));
 	else
 		return (-1);
 }
-// return value -> len 
-// error -> return -1
-// csdi
-// puxX%
 
 int	ft_printf(const char *format, ...)
 {
@@ -61,5 +59,3 @@ int	ft_printf(const char *format, ...)
 	va_end(ap);
 	return (len);
 }
-// cspdiuxX% (9)
-// case of fail of write
