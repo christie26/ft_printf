@@ -17,7 +17,7 @@ SRCS		= ft_format_1.c ft_format_2.c ft_printf.c ft_utils.c
 LOBJS		= ${LSRCS:.c=.o}
 OBJS		= ${SRCS:.c=.o}
 
-LIBFT		= ./libft.a
+LIBFT		= ./libft/libft.a
 NAME		= libftprintf.a
 
 CC			= cc
@@ -27,11 +27,12 @@ RM			= rm -f
 
 all:		${NAME}
 
-${NAME}:	${LIBFT} ${OBJS} 
-			ar rcs ${NAME} ${LIBFT} ${OBJS}
+${NAME}:	${LIBFT} ${OBJS}
+			cp ${LIBFT} ./${NAME}
+			ar rcs ${NAME} ${OBJS}
 
 ${LIBFT}:
-			./libft/ make all	
+			make -C ./libft	
 
 .c.o:
 			${CC} ${CFLAGS}	-c $< -o $@
@@ -43,6 +44,5 @@ fclean:		clean
 			${RM} ${NAME} ${LIBFT}
 
 re:			fclean all
-
 
 .PHONY:		all clean fclean re
