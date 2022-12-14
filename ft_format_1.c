@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 10:36:26 by yoonsele          #+#    #+#             */
-/*   Updated: 2022/12/04 17:25:44 by yoonsele         ###   ########.fr       */
+/*   Updated: 2022/12/13 16:57:11 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,6 @@ int	ft_printf_s(va_list ap)
 		return (write(1, s, ft_strlen(s)));
 }
 
-char	*ft_reverse(char *str)
-{
-	int		len;
-	int		i;
-	char	*res;
-
-	len = ft_strlen(str);
-	res = (char *)malloc(len + 1);
-	if (!res)
-		return (0);
-	i = 0;
-	while (i < len)
-	{
-		res[i] = str[len - i - 1];
-		i++;
-	}
-	res[i] = 0;
-	return (res);
-}
-
 int	ft_printf_di(va_list ap)
 {
 	int		d;
@@ -70,25 +50,14 @@ int	ft_printf_di(va_list ap)
 int	ft_printf_u(va_list ap)
 {
 	unsigned int	u;
-	int				i;
 	int				tem;
 	char			*res;
-	char			tmp[12];
 
 	u = va_arg(ap, int);
 	if (u == 0)
 		res = ft_zero();
 	else
-	{
-		i = 0;
-		while (u != 0)
-		{
-			tmp[i++] = (u % 10) + '0';
-			u /= 10;
-		}
-		tmp[i] = 0;
-		res = ft_reverse(tmp);
-	}	
+		res = ft_utoa(u);
 	if (!res)
 		return (-1);
 	tem = write(1, res, ft_strlen(res));
